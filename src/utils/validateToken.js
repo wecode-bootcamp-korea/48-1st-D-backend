@@ -7,7 +7,7 @@ const validateToken = async (req, res, next) => {
     next();
   } catch (err) {
     next(err);
-    res.json({ message: err });
+    res.json({ message: err.message });
   }
 };
 exports.module = { validateToken };

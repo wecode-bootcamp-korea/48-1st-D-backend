@@ -4,4 +4,6 @@ const threadRouter = require("./threadRouter");
 
 const router = express.Router();
 
+router.use("/thread", threadRouter);
+
 module.export = { router };

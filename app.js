@@ -4,8 +4,6 @@ const routes = require("./routes");
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-// const bcrypt = require("bcrypt"); service
-// const jwt = require("jsonwebtoken"); service
 
 const app = express();
 

@@ -10,4 +10,5 @@ const validateToken = async (req, res, next) => {
     res.json({ message: err.message });
   }
 };
-exports.module = { validateToken };
+
+module.exports = { validateToken };

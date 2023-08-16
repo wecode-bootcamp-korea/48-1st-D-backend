@@ -1,14 +1,16 @@
 const express = require("express");
 const { AppDataSource } = require("./data-source.js");
 
-const lookUpThreadList = async (req, res) => {
-  await AppdDataSource.query(
+const list = async () => {
+  const threads = await AppDataSource.query(
     `SELECT
-        t.content,
-        t.created_at,
-        t.updated_at,
-        u.nickcname
-      FROM threads t
-      INNER JOIN users u ON t.user_id = u.id `
+          t.content,
+          t.created_at,
+          t.updated_at,
+          u.nickname
+        FROM threads t
+        INNER JOIN users u ON t.user_id = u.id `
   );
+  return threads;
 };
+module.exports = { list };

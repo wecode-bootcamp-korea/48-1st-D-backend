@@ -1,6 +1,8 @@
 const express = require("express");
-const threadController = require("./threadController");
+const { threadsList } = require("../controllers/threadController");
+const { dataInitialize } = require("../models/data-source");
+const threadRouter = express.Router();
 
-app.get("/thread", threadController.xxx);
-
-module.export = {};
+threadRouter.use("/list", dataInitialize);
+threadRouter.get("/list", threadsList);
+module.exports = { threadRouter };

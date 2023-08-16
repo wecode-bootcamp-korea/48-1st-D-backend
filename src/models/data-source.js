@@ -9,4 +9,13 @@ const AppDataSource = new DataSource({
   database: process.env.DB_NAME,
 });
 
-module.exports = { AppDataSource };
+const dataInitialize = async (res, req, next) => {
+  await AppDataSource.initialize();
+  try {
+    console.log("database has been initialized");
+    next();
+  } catch (err) {
+    console.log(err);
+  }
+};
+module.exports = { AppDataSource, dataInitialize };

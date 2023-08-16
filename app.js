@@ -1,13 +1,18 @@
 require("dotenv").config();
-const routes = require("./routes");
+const { routes } = require("./src/routes");
 
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-// const bcrypt = require("bcrypt"); service
-// const jwt = require("jsonwebtoken"); service
+const {AppDataSource} = require("./src/models/data-source")
 
 const app = express();
+
+
+AppDataSource.initialize()
+    .then(() => {
+        console.log("Data Source has been initialized!")
+    })
 
 app.use(express.json());
 app.use(cors());

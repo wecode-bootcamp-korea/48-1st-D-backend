@@ -3,7 +3,14 @@ const bcrypt = require("bcrypt");
 const userDao = require("../models/userDao");
 const { validateEmail } = require("../utils/validators");
 
-const signUp = async (email, password) => {
+const signUp = async (
+  email,
+  password,
+  nickname,
+  phone_number,
+  birthday,
+  profile_image
+) => {
   validateEmail(email);
 
   const user = await userDao.getUserByEmail(email);
@@ -15,7 +22,14 @@ const signUp = async (email, password) => {
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
-  await userDao.createUser(email, hashedPassword);
+  await userDao.createUser(
+    email,
+    hashedPassword,
+    nickname,
+    phone_number,
+    birthday,
+    profile_image
+  );
 };
 
 module.exports = { signUp };

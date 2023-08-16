@@ -5,7 +5,6 @@ const morgan = require("morgan");
 const cors = require("cors");
 
 const { AppDataSource } = require("./src/models/data-source");
-// const router = require("./src/routes/");
 const { routes } = require("./src/routes");
 
 const app = express();

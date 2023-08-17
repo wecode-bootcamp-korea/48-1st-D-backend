@@ -1,5 +1,6 @@
 const express = require("express");
 
+<<<<<<< HEAD
 const threadController = require("../controllers/threadController");
 
 const threadRouter = express.Router(); 
@@ -19,3 +20,6 @@ threadRouter.get("/contentin", threadController.threadShow);
 
 
 module.exports = { threadRouter };
+=======
+module.exports = {};
+>>>>>>> main

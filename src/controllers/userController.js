@@ -1,17 +1,16 @@
-// const express = require("express");
 const userSignUpService = require("../services/userSignUpService");
 
 const signUp = async (req, res) => {
   try {
-    const { email, password, nickname, phone_number, birthday, profile_image } =
+    const { email, password, nickname, phoneNumber, birthday, profileImage } =
       req.body;
     await userSignUpService.signUp(
       email,
       password,
       nickname,
-      phone_number,
+      phoneNumber,
       birthday,
-      profile_image
+      profileImage
     );
 
     res.status(201).end();

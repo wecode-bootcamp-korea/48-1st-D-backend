@@ -4,19 +4,24 @@ const createUser = async (
   email,
   password,
   nickname,
-  phone_number,
+  phoneNumber,
   birthday,
-  profile_image
+  profileImage
 ) => {
   await AppDataSource.query(
     `
 INSERT INTO users(
-    email, password, nickname, phone_number, birthday, profile_image
+    email,
+    password,
+    nickname,
+    phone_number,
+    birthday,
+    profile_image
 ) VALUES (
     ?, ?, ?, ?, ?, ?
 )
 `,
-    [email, password, nickname, phone_number, birthday, profile_image]
+    [email, password, nickname, phoneNumber, birthday, profileImage]
   );
 };
 

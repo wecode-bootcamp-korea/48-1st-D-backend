@@ -1,5 +1,4 @@
 const bcrypt = require("bcrypt");
-
 const userDao = require("../models/userDao");
 const { validateEmail } = require("../utils/validators");
 
@@ -7,9 +6,9 @@ const signUp = async (
   email,
   password,
   nickname,
-  phone_number,
+  phoneNumber,
   birthday,
-  profile_image
+  profileImage
 ) => {
   validateEmail(email);
 
@@ -20,15 +19,16 @@ const signUp = async (
     err.statusCode = 400;
     throw err;
   }
+  const saltRounds = process.env.SALT_ROUNDS;
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(password, parseInt(saltRounds));
   await userDao.createUser(
     email,
     hashedPassword,
     nickname,
-    phone_number,
+    phoneNumber,
     birthday,
-    profile_image
+    profileImage
   );
 };
 

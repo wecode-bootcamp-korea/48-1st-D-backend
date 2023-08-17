@@ -1,4 +1,9 @@
 const express = require("express");
-const threadController = require("./threadController");
+const threadController = require("../controllers/threadController");
+const threadRouter = express.Router(); 
+const { loginRequired } = require('../utils/tokenValidate')
 
-module.exports = {};
+threadRouter.post("/post", loginRequired,threadController.threadCreate);
+threadRouter.get("/post", loginRequired, threadController.showProfileAndNickname);
+
+module.exports = { threadRouter };

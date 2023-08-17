@@ -3,10 +3,10 @@ const { AppDataSource } = require("./data-source");
 const createUser = async (
   email,
   password,
-  nickname,
+  nickname = process.env.DEFAULT_NAME,
   phoneNumber,
   birthday,
-  profileImage
+  profileImage = process.env.DEFAULT_PROFILE_IMAGE
 ) => {
   await AppDataSource.query(
     `
@@ -38,4 +38,19 @@ const getUserByEmail = async (email) => {
   return user;
 };
 
-module.exports = { createUser, getUserByEmail };
+const getUserById = async(id) => {
+  const userData = await AppDataSource.query(
+  `SELECT id, 
+  email, 
+  password, 
+  nickname, 
+  phone_number, 
+  birthday, 
+  profile_image, 
+  created_at, 
+  updated_at 
+  FROM users WHERE id =?`,[id])
+  return userData;
+}
+
+module.exports = { createUser, getUserByEmail, getUserById };

@@ -1,10 +1,29 @@
-const usersignIn = require("../services/userSignInService")
+const userService = require("../services/userService");
+
+const signUp = async (req, res) => {
+  try {
+    const { email, password, nickname, phoneNumber, birthday, profileImage } =
+      req.body;
+    await userService.signUp(
+      email,
+      password,
+      nickname,
+      phoneNumber,
+      birthday,
+      profileImage
+    );
+
+    res.status(201).end();
+  } catch (err) {
+    res.status(err.statusCode || 400).json({ message: err.message });
+  }
+};
 
 const signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
   
-    const accessToken = await usersignIn.signIn(email, password);
+    const accessToken = await userService.signIn(email, password);
   
     res.status(200).json({ accessToken: accessToken });
   } 
@@ -14,4 +33,4 @@ const signIn = async (req, res) => {
   }
 };
 
-module.exports = {signIn};
+module.exports = {signUp,signIn};

@@ -3,9 +3,11 @@ const threadService = require("../services/threadPostService");
 
 const threadCreate = async (req, res) => {
  try {
-    const { content,user_id } = req.body;
+  const [userData] = req.user
+  const userId = userData.id
+    const { content } = req.body;
     
-    await threadService.threadCreate( content,user_id ); //res.를 req로 수정했습니다
+    await threadService.threadCreate( content, userId );
 
     res.status(201).end();
  }catch (err) {
@@ -13,18 +15,17 @@ const threadCreate = async (req, res) => {
  }
 };
 
-const threadShow = async (req, res) => {
+const showProfileAndNickname = async (req, res) => {
     try {
-        const { nickname, porfile_image } = req.body;
+        const [userData] = req.user
+        const userNickname = userData.nickname
+        const userProfileImage = userData.profile_image
 
-        await threadService.threadShow( nickname, porfile_image );
-
-        res.status(200).json({ message : 'show thread!' });
+        res.status(200).json({ nicknmae: userNickname, profileImage: userProfileImage });
     } catch (err) {
       res.status(err.statusCode || 401).json({ message: err.message });  
     }
 };
 
-
-module.exports = { threadCreate, threadShow };
+module.exports = { threadCreate, showProfileAndNickname };
 

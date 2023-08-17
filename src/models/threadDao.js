@@ -1,6 +1,6 @@
 const { AppDataSource } = require("./data-source");
 
-const createThread = async(content, user_id) => { 
+const createThread = async(content, userId) => { 
     await AppDataSource.query(
     `
     INSERT INTO threads (
@@ -10,36 +10,8 @@ const createThread = async(content, user_id) => {
         ?, ?
     )
     `,
-    [ content, user_id]
+    [ content, userId]
     );
 };
 
-const showThread = async (user_id) => {
-      await AppDataSource.query(
-      `
-      SELECT 
-      nickname, porfile_image FROM users
-      WHERE id = ?
-      `,
-      [user_id]
-    );
-  };
-
-module.exports = { createThread, showThread };
-
-
-//데이터를 빼내서 보여주기 하는 작업
-/* const getContent = async (nickname, content, created_at)
-=>{
-    const = await AppDataSource.query(
-        `
-        SELECT content, nickname, create_at
-        FROM thread
-        WHERE id=#{num}
-        `,
-        [nickname, content, created_at]
-    );
-}
-
-odule.exports = { insertContent, getContent };
- */
+module.exports = { createThread};

@@ -3,7 +3,6 @@ const userDao = require('../models/userDao');
 
 const loginRequired = async (req, res, next) => {
   try {
-    
     const accessToken = req.headers.authorization;
 
     if (!accessToken) {
@@ -25,8 +24,6 @@ const loginRequired = async (req, res, next) => {
       return res.status(error.statusCode).json({ message: error.message });
     }
 
-
-    
     req.user = user;
     
     next();
@@ -38,7 +35,6 @@ const loginRequired = async (req, res, next) => {
     return res.status(error.statusCode).json({ message: error.message });
   }
 };
-
 
 module.exports = { loginRequired };
 

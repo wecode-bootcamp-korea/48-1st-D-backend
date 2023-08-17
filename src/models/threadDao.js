@@ -15,7 +15,7 @@ const createThread = async(content, user_id) => {
 };
 
 const showThread = async (user_id) => {
-    const test = await AppDataSource.query(
+      await AppDataSource.query(
       `
       SELECT 
       nickname, porfile_image FROM users
@@ -23,8 +23,6 @@ const showThread = async (user_id) => {
       `,
       [user_id]
     );
-  
-    return test;
   };
 
 module.exports = { createThread, showThread };

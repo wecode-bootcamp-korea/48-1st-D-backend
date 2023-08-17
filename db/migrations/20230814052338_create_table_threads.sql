@@ -10,3 +10,4 @@ CREATE TABLE threads (
 
 -- migrate:down
 
+mysql> INSERT INTO threads (passowrd, phone_number, birthday) VALUES (123, 1210-130-131, 10-19);

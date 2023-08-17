@@ -1,4 +1,6 @@
 const express = require("express");
 const userController = require("./userController");
 
-module.export = {};
+const userRouter = express.Router();
+
+module.export = { userRouter };

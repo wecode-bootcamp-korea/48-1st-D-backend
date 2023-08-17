@@ -2,7 +2,7 @@ const express = require("express");
 const { lookUp } = require("../services/theradListService");
 const threadsList = async (req, res) => {
   try {
-    res.json(await lookUp());
+    res.json(await lookUp(req, res));
   } catch (err) {
     return res.json({ message: err.message });
   }

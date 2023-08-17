@@ -1,8 +1,9 @@
-const express = require("express");
-const { list } = require("../models/threadDao");
+const { threadsList } = require("../models/threadDao");
 
-const lookUp = async () => {
-  const reverse = (await list()).reverse();
+const lookUp = async (req, res) => {
+  // console.log(req.user);
+  const id = req.user.id;
+  const reverse = (await threadsList(id)).reverse();
   return reverse;
 };
 module.exports = { lookUp };

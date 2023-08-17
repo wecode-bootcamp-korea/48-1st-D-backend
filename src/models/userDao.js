@@ -3,10 +3,10 @@ const { AppDataSource } = require("./data-source");
 const createUser = async (
   email,
   password,
-  nickname,
+  nickname = 'Name',
   phoneNumber,
   birthday,
-  profileImage
+  profileImage = 'https://img.icons8.com/?size=512&id=ABBSjQJK83zf&format=png'
 ) => {
   await AppDataSource.query(
     `

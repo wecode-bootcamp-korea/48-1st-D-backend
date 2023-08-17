@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const userDao = require("../models/userDao");
+const jwt = require('jsonwebtoken')
 const { validateEmail } = require("../utils/validators");
 
 const signUp = async (
@@ -33,7 +34,7 @@ const signUp = async (
 };
 
 const signIn = async (email, password) => {
-  const user = await Dao.getUserByEmail(email);
+  const user = await userDao.getUserByEmail(email);
   if (!user) {
     const err = new Error('spenpcified user does not exist');
     err.statusCode = 404;

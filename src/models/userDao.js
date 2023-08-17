@@ -1,5 +1,5 @@
 const {AppDataSource} = require("./data-source")
-// const { DataSource } = require("typeorm"); 
+
 const getUserByEmail = async (email) => {
   const [user] = await AppDataSource.query(
     `
@@ -14,4 +14,4 @@ const getUserByEmail = async (email) => {
   return user;
 };
 
-module.exports = { getUserByEmail };
+module.exports = {getUserByEmail};

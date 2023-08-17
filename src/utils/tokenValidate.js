@@ -16,9 +16,9 @@ const loginRequired = async (req, res, next) => {
 
     const payload = await jwt.verify(accessToken, process.env.JWT_SECRET);
 
-    const email = await userService.getEmailById(payload.id);
+    const user = await userService.getUserById(payload.id);
 
-    if (!email) {
+    if (!user) {
       const error = new Error('USER_DOES_NOT_EXIST');
       error.statusCode = 404;
 
@@ -27,8 +27,8 @@ const loginRequired = async (req, res, next) => {
 
 
     
-    req.email = email;
-
+    req.user = user;
+    
     next();
 
   } catch {

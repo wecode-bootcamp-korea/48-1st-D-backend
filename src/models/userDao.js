@@ -38,9 +38,9 @@ const getUserByEmail = async (email) => {
   return user;
 };
 
-const getUserById = async(id) => {
+const getUserById = async (id) => {
   const userData = await AppDataSource.query(
-  `SELECT id, 
+    `SELECT id, 
   email, 
   password, 
   nickname, 
@@ -49,8 +49,10 @@ const getUserById = async(id) => {
   profile_image, 
   created_at, 
   updated_at 
-  FROM users WHERE id =?`,[id])
+  FROM users WHERE id =?`,
+    [id]
+  );
   return userData;
-}
+};
 
 module.exports = { createUser, getUserByEmail, getUserById };

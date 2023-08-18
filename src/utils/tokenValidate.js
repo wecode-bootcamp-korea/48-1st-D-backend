@@ -12,8 +12,7 @@ const loginRequired = async (req, res, next) => {
       return res.status(error.statusCode).json({ message: error.message });
     }
 
-    const payload = jwt.verify(accessToken, process.env.JWT_SECRET);
-    console.log(payload);
+    const payload = await jwt.verify(accessToken, process.env.JWT_SECRET);
 
     const user = await userDao.getUserById(payload.id);
 
@@ -25,7 +24,6 @@ const loginRequired = async (req, res, next) => {
     }
 
     req.user = user;
-    console.log(req);
 
     next();
   } catch {

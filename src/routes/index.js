@@ -1,11 +1,10 @@
 const express = require("express");
-const userRouter = require("./userRouter");
+const { userRouter } = require("./userRouter");
 const { threadRouter } = require("./threadsRouter");
-const { loginRequired } = require("../utils/tokenValidate");
 
-const router = express.Router();
+const routes = express.Router();
 
-router.use("/thread", threadRouter);
-router.get("/thread", loginRequired);
+routes.use("/user", userRouter);
+routes.use("/thread", threadRouter);
 
-module.exports = { router };
+module.exports = { routes };

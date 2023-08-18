@@ -1,13 +1,37 @@
-const express = require("express");
-const { lookUp } = require("../services/theradListService");
+const threadService = require("../services/threadPostService");
+
+const threadCreate = async (req, res) => {
+  try {
+    const [userData] = req.user;
+    const userId = userData.id;
+    const { content } = req.body;
+
+    await threadService.threadCreate(content, userId);
+
+    res.status(201).end();
+  } catch (err) {
+    res.status(err.statusCode || 400).json({ message: err.message });
+  }
+};
+
+const showProfileAndNickname = async (req, res) => {
+  try {
+    const [userData] = req.user;
+    const userNickname = userData.nickname;
+    const userProfileImage = userData.profile_image;
+
+    res.status(200).json({ nicknmae: userNickname, profileImage: userProfileImage });
+  } catch (err) {
+    res.status(err.statusCode || 401).json({ message: err.message });
+  }
+};
+
 const threadsList = async (req, res) => {
   try {
-    res.json(await lookUp(req, res));
+    res.json(await threadService.lookUp(req, res));
   } catch (err) {
     return res.json({ message: err.message });
   }
 };
-//req로 현재 사용자 정보 받아오고, 보려는 thread id 받고 (mysql select 쿼리로 조회하는 함수 서비스에서 받아다가 샤용)
-//토큰 확인하고(토큰 확인 함수는 서비스에 새로 하나 파 넣자)
-//get method로 db에 저장된 자료들을 res로 보내기
-module.exports = { threadsList };
+
+module.exports = { threadCreate, showProfileAndNickname, threadsList };

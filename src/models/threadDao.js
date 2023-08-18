@@ -1,5 +1,18 @@
-const express = require("express");
-const { AppDataSource } = require("./data-source.js");
+const { AppDataSource } = require("./data-source");
+
+const createThread = async (content, userId) => {
+  await AppDataSource.query(
+    `
+    INSERT INTO threads (
+        content,
+        user_id
+    ) VALUES (
+        ?, ?
+    )
+    `,
+    [content, userId]
+  );
+};
 
 const threadsList = async (id) => {
   const threads = await AppDataSource.query(
@@ -20,4 +33,4 @@ const threadsList = async (id) => {
   return threads;
 };
 
-module.exports = { threadsList };
+module.exports = { createThread, threadsList };

@@ -1,4 +1,4 @@
-const threadService = require("../services/threadPostService");
+const threadService = require("../services/threadService");
 
 const threadCreate = async (req, res) => {
   try {
